@@ -1,0 +1,68 @@
+# Variables
+@baseUrl = http://localhost:3001
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbW96Y3RzcnUwMDAwbXN3b3RnanM3YTgzIiwiZW1haWwiOiJhZG1pbkBwb3J0Zm9saW8uY29tIiwiaWF0IjoxNzc4MzkyMzI1LCJleHAiOjE3NzgzOTMyMjV9.BkJJmqJCqQirElirluHdglyrXntvZ9y-VqWDyRdmSZc
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbW96Y3RzcnUwMDAwbXN3b3RnanM3YTgzIiwiZW1haWwiOiJhZG1pbkBwb3J0Zm9saW8uY29tIiwiaWF0IjoxNzc4MzkyMzI1LCJleHAiOjE3Nzg5OTcxMjV9.GzM4__0uO9h9jpgLMWHbevQF_u0a8eSlwRpEjAHv1U0
+
+# 1. Register
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email":"admin@portfolio.com",
+  "password":"123456"
+}
+
+###
+# 2. Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email":"admin@portfolio.com",
+  "password":"123456"
+}
+
+###
+# 3. RefreshToken
+POST {{baseUrl}}/auth/refresh
+Authorization: Bearer {{refreshToken}}
+
+###
+# 4. Logout (single device)
+POST {{baseUrl}}/auth/logout
+Authorization: Bearer {{refreshToken}}
+
+###
+# 5. Logout All
+POST {{baseUrl}}/auth/logout-all
+Authorization: Bearer {{accessToken}}
+
+###
+# 5. Test Error Cases
+# duplicate email - should response 409-Conflict
+POST {{baseUrl}}/auth/register 
+Content-Type: application/json
+
+{
+  "email":"admin@portfolio.com",
+  "password":"123456"
+}
+
+###
+# wrong password - should response 401-Unauthorized
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email":"admin@portfolio.com",
+  "password":"wrongpassword"
+}
+
+###
+# no token in header - should response 401-Unauthorized
+POST {{baseUrl}}/auth/logout-all
+
+###
+# Token expired or invalid - should response 401-Unauthorized
+POST {{baseUrl}}/auth/refresh
+Authorization: Bearer invalidToken
