@@ -17,13 +17,13 @@ export class AuthService {
     private readonly configService: ConfigService,
   ) {}
 
-  // region Register
+  // Register
   async register(dto: CreateUserDto) {
     const user = await this.usersService.create(dto);
-    return this.generateTokens(user.id, user.email)
+    return this.generateTokens(user.id, user.email);
   }
 
-  // region Login
+  // Login
   async login(dto: LoginDto): Promise<AuthTokens> {
     // use findByEmail because it's return user's password
     const user = await this.usersService.findByEmail(dto.email);
@@ -33,7 +33,8 @@ export class AuthService {
     // check if the password is correct or not
     const isPasswordValid = await bcrypt.compare(dto.password, user.password);
 
-    if (!isPasswordValid) throw new UnauthorizedException('Invalid credentials');
+    if (!isPasswordValid)
+      throw new UnauthorizedException('Invalid credentials');
 
     return this.generateTokens(user.id, user.email);
   }
@@ -85,19 +86,22 @@ export class AuthService {
   ): Promise<AuthTokens> {
     const payload: JwtPayload = { sub: userId, email };
 
+    // options for both tokens
     const accessTokenOptions: JwtSignOptions = {
       secret: this.configService.get<string>('JWT_SECRET'),
       expiresIn: this.configService.get<string>('JWT_EXPIRES_IN') as any,
-    }
+    };
 
     const refreshTokenOptions: JwtSignOptions = {
       secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
-      expiresIn: this.configService.get<string>('JWT_REFRESH_EXPIRES_IN') as any,
-    }
+      expiresIn: this.configService.get<string>(
+        'JWT_REFRESH_EXPIRES_IN',
+      ) as any,
+    };
 
     const [accessToken, refreshToken] = await Promise.all([
-      this.jwtService.signAsync({...payload}, accessTokenOptions),
-      this.jwtService.signAsync({...payload}, refreshTokenOptions),
+      this.jwtService.signAsync({ ...payload }, accessTokenOptions),
+      this.jwtService.signAsync({ ...payload }, refreshTokenOptions),
     ]);
 
     const refreshExpiresIn = this.configService.get<string>(
