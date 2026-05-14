@@ -1,14 +1,14 @@
 # Variables
 @baseUrl = http://localhost:3001
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbW96Y3RzcnUwMDAwbXN3b3RnanM3YTgzIiwiZW1haWwiOiJhZG1pbkBwb3J0Zm9saW8uY29tIiwiaWF0IjoxNzc4MzkyMzI1LCJleHAiOjE3NzgzOTMyMjV9.BkJJmqJCqQirElirluHdglyrXntvZ9y-VqWDyRdmSZc
-@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbW96Y3RzcnUwMDAwbXN3b3RnanM3YTgzIiwiZW1haWwiOiJhZG1pbkBwb3J0Zm9saW8uY29tIiwiaWF0IjoxNzc4MzkyMzI1LCJleHAiOjE3Nzg5OTcxMjV9.GzM4__0uO9h9jpgLMWHbevQF_u0a8eSlwRpEjAHv1U0
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbW96Y3RzcnUwMDAwbXN3b3RnanM3YTgzIiwiZW1haWwiOiJhZG1pbkBwb3J0Zm9saW8uY29tIiwiaWF0IjoxNzc4Nzc4NjU5LCJleHAiOjE3Nzg3Nzk1NTl9.JxlGeFbP6Q7snDiWPM1xmuihYtJ2jnge0YjRLAUeoAw
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbW96Y3RzcnUwMDAwbXN3b3RnanM3YTgzIiwiZW1haWwiOiJhZG1pbkBwb3J0Zm9saW8uY29tIiwiaWF0IjoxNzc4MzkyMzI1LCJleHAiOjE3NzgzOTMyMjV9.BkJJmqJCqQirElirluHdglyrXntvZ9y-VqWDyRdmSZc
 
 # 1. Register
 POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
-  "email":"admin@portfolio.com",
+  "email":"admin@example.com",
   "password":"123456"
 }
 
