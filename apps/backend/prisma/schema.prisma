@@ -4,8 +4,8 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
   moduleFormat = "cjs"
 }
 
@@ -13,6 +13,44 @@ datasource db {
   provider = "postgresql"
 }
 
+// -- Enums ----------
+enum ProjectType {
+  WEB
+  MOBILE
+  GAME
+  OTHER
+}
+
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  FREELANCE
+  CONTRACT
+}
+
+enum TeamworkType {
+  SOLO
+  TEAM
+}
+
+enum SkillLevel {
+  BEGINNER
+  INTERMEDIATED
+  ADVANCE
+  EXPERT
+}
+
+enum SkillCategory {
+  FRONTEND
+  BACKEND
+  DATABASE
+  DEVOPS
+  TOOL
+  GAME_DEV
+  OTHER
+}
+
+// -- AUTH
 model User {
   id            String         @id @default(cuid())
   email         String         @unique
@@ -33,4 +71,97 @@ model RefreshToken {
   createdAt DateTime @default(now())
 
   @@map("refreshTokens")
+}
+
+// -- PORTFOLIO
+model HeroSection {
+  id        String   @id @default(cuid())
+  name      String
+  title     String
+  subtitle  String
+  bio       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("hero_section")
+}
+
+model AboutSection {
+  id           String   @id @default(cuid())
+  description  String
+  location     String
+  availability String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("about_section")
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  email     String
+  github    String?
+  linkedin  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("contacts")
+}
+
+// -- PORTFOLIO : Multi-row sections
+
+// MASTER: Skill
+model Skill {
+  id       String        @id @default(cuid())
+  name     String        @unique
+  level    SkillLevel    @default(INTERMEDIATED)
+  category SkillCategory
+
+  projectSkills ProjectSkill[]
+
+  @@map("skills")
+}
+
+model ProjectSkill {
+  projectId String
+  skillId   String
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  skill   Skill   @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, skillId])
+  @@map("project_skills")
+}
+
+model Project {
+  id          String      @id @default(cuid())
+  title       String
+  description String
+  type        ProjectType @default(WEB)
+  githubUrl   String?
+  liveUrl     String?
+  imageUrl    String?
+  order       Int         @default(0)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  skills ProjectSkill[]
+
+  @@map("projects")
+}
+
+model Experience {
+  id             String         @id @default(cuid())
+  company        String
+  position       String
+  description    String
+  startDate      DateTime
+  endDate        DateTime?
+  employmentType EmploymentType @default(FULL_TIME)
+  teamworkType   TeamworkType   @default(TEAM)
+  order          Int            @default(0)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@map("experiences")
 }
