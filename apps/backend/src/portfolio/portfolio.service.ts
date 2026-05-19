@@ -112,7 +112,7 @@ export class PortfolioService {
     return this.prisma.skill.update({ where: { id }, data: dto });
   }
 
-  async deleteSKill(id: string): Promise<void> {
+  async deleteSkill(id: string): Promise<void> {
     await this.findSkillOrThrow(id);
     await this.prisma.skill.delete({ where: { id } });
   }
