@@ -16,7 +16,6 @@ import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { CreateExperienceDto } from './dto/create-experience.dto';
 import { UpdateExperienceDto } from './dto/update-experience.dto';
-import { ExperienceOrderByWithAggregationInput } from 'generated/prisma/models';
 
 type ProjectWithSkill = Project & {
   skills: Array<{
