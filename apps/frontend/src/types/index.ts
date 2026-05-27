@@ -1,9 +1,24 @@
-import { DateTimeFieldRefInput } from './../../../backend/generated/prisma/internal/prismaNamespace';
 // ----- Auth
 export interface AuthTokens {
   accessToken: string;
   refreshToken: string;
 }
+
+// ----- Enums
+export type ProjectType = 'WEB' | 'MOBILE' | 'GAME' | 'OTHER';
+export type EmploymentType =
+  | 'FULL_TIME'
+  | 'PART_TIME'
+  | 'FREELANCE'
+  | 'CONTRACT';
+export type TeamworkType = 'SOLO' | 'TEAM';
+export type SkillLevel = 'BEGINNER' | 'INTERMEDIATED' | 'ADVANCE' | 'EXPERT';
+export type SkillCategory =
+  | 'FRONTEND'
+  | 'BACKEND'
+  | 'DATABASE'
+  | 'DEVOPS'
+  | 'TOOL';
 
 // ----- Portfolio Sections
 export interface HeroSection {
@@ -20,31 +35,48 @@ export interface AboutSection {
   location: string;
   availability: string;
 }
+export interface Skill {
+  id: string
+  name: string
+  level: SkillLevel
+  category: SkillCategory
+}
 
-export interface SkillSectin {
+export interface ProjectSkill {
+  projectId: string
+  skillId: string
+  skill: Skill
+}
+
+export interface SkillSection {
   id: string;
   name: string;
   level: string;
   category: string;
 }
 
-export interface ProjectSection {
-  id: string;
-  title: string;
-  description: string;
-  techStack: string[];
-  githubUrl?: string;
-  liveUrl?: string;
-  image?: string;
+export interface Project {
+  id: string
+  title: string
+  description: string
+  type: ProjectType
+  githubUrl?: string
+  liveUrl?: string
+  imageUrl?: string
+  order: number
+  skills: ProjectSkill[]
 }
 
-export interface ExperienceSection {
-  id: string;
-  company: string;
-  position: string;
-  startDate: string;
-  endDate?: string;
-  description: string;
+export interface Experience {
+  id: string
+  company: string
+  position: string
+  description: string
+  startDate: string
+  endDate?: string
+  employmentType: EmploymentType
+  teamworkType: TeamworkType
+  order: number
 }
 
 export interface ContactSection {
