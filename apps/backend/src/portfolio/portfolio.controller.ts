@@ -53,6 +53,7 @@ export class PortfolioController {
   }
 
   // -- Contact ----------
+  @Get('contact')
   getContact(): Promise<Contact> {
     return this.portfolioService.getContact();
   }

@@ -149,7 +149,7 @@ async function main() {
       },
       {
         company: 'MyHost Company Limited',
-        position: 'Software Developer',
+        position: 'Frontend Developer',
         startDate: new Date('2025-06-30'),
         endDate: new Date('2025-07-29'),
         description:
