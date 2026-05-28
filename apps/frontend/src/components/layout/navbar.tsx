@@ -23,21 +23,24 @@ const Navbar = () => {
   return (
     <header className='sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm'>
       <div className='mx-auto flex h-14 max-w-5xl items-center justify-between px-6'>
-        <span className='font-semibold tracking-tight'>Petchgnz&apos;s Portfolio</span>
+        <span className='font-semibold tracking-tight'>
+          Petchgnz&apos;s Portfolio
+        </span>
 
         <div className='flex items-center gap-2'>
           <ThemeToggle />
 
           {!isLoading && (
             <>
-              {isAuthenticated ?
-                <Button variant={'ghost'} size={'sm'} onClick={handleLogout}>
+              {isAuthenticated && (
+                <Button
+                  variant={'ghost'}
+                  size={'sm'}
+                  onClick={handleLogout}
+                >
                   <LogOut className='mr-2 size-4' />
                 </Button>
-              : <Button variant={'ghost'} size={'sm'} onClick={() => router.push('/login')}>
-                  <LogIn className='mr-2 size-4' />
-                </Button>
-              }
+              )}
             </>
           )}
         </div>
