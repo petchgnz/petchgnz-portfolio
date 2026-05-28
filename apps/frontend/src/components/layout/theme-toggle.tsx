@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Button } from '@/components/ui/button';
 import { useTheme } from 'next-themes';
@@ -9,14 +9,14 @@ const ThemeToggle = () => {
 
   return (
     <Button
-      variant={'default'}
-      size={'icon'}
+      variant='default'
+      size='icon'
+      className='relative overflow-hidden cursor-pointer'
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
-      <Sun className='size-5 rotate-0 scale-100 transition-all dark:rotate-90 dark:scale-0' />
-      <Moon className='absolute size-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
+      <Sun className='size-5 rotate-0 scale-100 transition-all duration-300 ease-in-out dark:-rotate-90 dark:scale-0' />
+      <Moon className='absolute size-5 rotate-90 scale-0 transition-all duration-300 ease-in-out dark:rotate-0 dark:scale-100' />
 
-      {/* sr-only: for accessibility  */}
       <span className='sr-only'>Toggle themes</span>
     </Button>
   );

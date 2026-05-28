@@ -3,7 +3,7 @@
 import ThemeToggle from '@/components/layout/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { useAuthStore } from '@/store/auth.store';
-import { LogIn, LogOut } from 'lucide-react';
+import { Shield, LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -32,7 +32,7 @@ const Navbar = () => {
 
           {!isLoading && (
             <>
-              {isAuthenticated && (
+              {isAuthenticated ?
                 <Button
                   variant={'ghost'}
                   size={'sm'}
@@ -40,7 +40,16 @@ const Navbar = () => {
                 >
                   <LogOut className='mr-2 size-4' />
                 </Button>
-              )}
+              : <Button
+                  variant={'outline'}
+                  size={'sm'}
+                  onClick={() => router.push('/login')}
+                  className='cursor-pointer flex justify-center'
+                >
+                  <Shield className='mr-2 size-4' />
+                  Admin Login
+                </Button>
+              }
             </>
           )}
         </div>
