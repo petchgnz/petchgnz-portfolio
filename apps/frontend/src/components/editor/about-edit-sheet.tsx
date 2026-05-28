@@ -40,7 +40,7 @@ export function AboutEditSheet({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="overflow-y-auto">
+      <SheetContent className="overflow-y-auto px-5">
         <SheetHeader>
           <SheetTitle>Edit About</SheetTitle>
         </SheetHeader>
@@ -73,7 +73,7 @@ export function AboutEditSheet({
             />
           ))}
 
-          <Button type="submit" className="w-full" disabled={isPending}>
+          <Button type="submit" className="w-full cursor-pointer" disabled={isPending}>
             {isPending
               ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Saving...</>
               : 'Save changes'

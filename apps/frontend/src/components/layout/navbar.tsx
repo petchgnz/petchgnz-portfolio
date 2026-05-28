@@ -27,7 +27,7 @@ const Navbar = () => {
           Petchgnz&apos;s Portfolio
         </span>
 
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-4'>
           <ThemeToggle />
 
           {!isLoading && (
@@ -37,8 +37,9 @@ const Navbar = () => {
                   variant={'ghost'}
                   size={'sm'}
                   onClick={handleLogout}
+                  className='cursor-pointer flex justify-center'
                 >
-                  <LogOut className='mr-2 size-4' />
+                  <LogOut className='size-4' />
                 </Button>
               : <Button
                   variant={'outline'}
@@ -46,7 +47,7 @@ const Navbar = () => {
                   onClick={() => router.push('/login')}
                   className='cursor-pointer flex justify-center'
                 >
-                  <Shield className='mr-2 size-4' />
+                  <Shield className='size-4' />
                   Admin Login
                 </Button>
               }

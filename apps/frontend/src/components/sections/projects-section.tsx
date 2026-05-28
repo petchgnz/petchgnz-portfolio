@@ -40,11 +40,11 @@ export function ProjectsSection() {
   return (
     <SectionWrapper
       title="Projects"
-      maxWidth="lg"
+      maxWidth="md"
       action={
         isAuthenticated ? (
-          <Button size="sm" onClick={() => setCreateOpen(true)}>
-            <Plus className="mr-2 h-4 w-4" />
+          <Button variant={'default'} size="sm" onClick={() => setCreateOpen(true)} className='cursor-pointer gap-2'>
+            <Plus className="size-4" />
             Add Project
           </Button>
         ) : undefined

@@ -52,8 +52,17 @@ export function ProjectEditSheet({ open, onOpenChange, defaultValues }: Props) {
   useEffect(() => { reset(getDefaults()) }, [defaultValues, reset])
 
   const onSubmit = (values: FormValues): void => {
+    const payload = {
+      ...values,
+      id: defaultValues?.id,
+      githubUrl: values.githubUrl || null,
+      liveUrl: values.liveUrl || null,
+      imageUrl: values.imageUrl || null,
+    }
+
     mutation.mutate(
-      { ...values, id: defaultValues?.id },
+      // { ...values, id: defaultValues?.id },
+      payload,
       { onSuccess: () => onOpenChange(false) },
     )
   }
@@ -62,8 +71,8 @@ export function ProjectEditSheet({ open, onOpenChange, defaultValues }: Props) {
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="overflow-y-auto">
-        <SheetHeader>
+      <SheetContent className="overflow-y-auto px-5" showCloseButton={false}>
+        <SheetHeader className='text-center'>
           <SheetTitle>{isEditing ? 'Edit Project' : 'Add Project'}</SheetTitle>
         </SheetHeader>
 
@@ -121,8 +130,8 @@ export function ProjectEditSheet({ open, onOpenChange, defaultValues }: Props) {
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor={name}>
                     {name === 'githubUrl' ? 'GitHub URL'
-                      : name === 'liveUrl' ? 'Live URL'
-                      : 'Image URL'}
+                      : name === 'liveUrl' ? 'Live URL (Optional)'
+                      : 'Image URL (Optional)'}
                   </FieldLabel>
                   <Input
                     {...field}
@@ -137,7 +146,7 @@ export function ProjectEditSheet({ open, onOpenChange, defaultValues }: Props) {
             />
           ))}
 
-          <Button type="submit" className="w-full" disabled={mutation.isPending}>
+          <Button type="submit" className="w-full cursor-pointer" disabled={mutation.isPending}>
             {mutation.isPending
               ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Saving...</>
               : isEditing ? 'Save changes' : 'Create project'

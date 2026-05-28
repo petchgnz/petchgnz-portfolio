@@ -45,8 +45,9 @@ export function ExperienceSection() {
           <Button
             size='sm'
             onClick={() => setCreateOpen(true)}
+            className='cursor-pointer gap-2'
           >
-            <Plus className='mr-2 h-4 w-4' />
+            <Plus className='size-4' />
             Add
           </Button>
         : undefined
@@ -76,7 +77,7 @@ export function ExperienceSection() {
                 className='group relative border-l-2 border-border pl-6'
               >
                 {/* Timeline dot */}
-                <div className='absolute -left-[5px] top-2 h-2 w-2 rounded-full bg-foreground' />
+                <div className='absolute -left-1.25 top-2 h-2 w-2 rounded-full bg-foreground' />
 
                 {/* Admin controls */}
                 {isAuthenticated && (

@@ -157,6 +157,16 @@ export class PortfolioService {
       where: { id },
       data: {
         ...projectData,
+
+        githubUrl:
+          projectData.githubUrl !== undefined
+            ? projectData.githubUrl
+            : undefined,
+        liveUrl:
+          projectData.liveUrl !== undefined ? projectData.liveUrl : undefined,
+        imageUrl:
+          projectData.imageUrl !== undefined ? projectData.imageUrl : undefined,
+
         ...(skillIds !== undefined && {
           skills: {
             deleteMany: {},

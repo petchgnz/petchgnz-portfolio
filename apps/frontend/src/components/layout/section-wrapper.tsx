@@ -44,8 +44,8 @@ export function SectionWrapper({
             {action}
             {/* Edit button for admin only */}
             {isAuthenticated && onEdit && (
-              <Button size="sm" variant="outline" onClick={onEdit}>
-                <Pencil className="mr-2 h-3 w-3" />
+              <Button size="sm" variant="outline" onClick={onEdit} className='gap-2 cursor-pointer'>
+                <Pencil className="h-3 w-3" />
                 Edit
               </Button>
             )}
