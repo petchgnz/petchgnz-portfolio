@@ -11,6 +11,7 @@ import { useAuthStore } from '@/store/auth.store';
 import { SectionWrapper } from '@/components/layout/section-wrapper';
 import { ExperienceEditSheet } from '@/components/editor/experience-edit-sheet';
 import type { Experience, EmploymentType } from '@/types';
+import { ConfirmDialog } from '../ui/confirm-dialog';
 
 const EMPLOYMENT_LABEL: Record<EmploymentType, string> = {
   FULL_TIME: 'Full-time',
@@ -30,6 +31,7 @@ export function ExperienceSection() {
   const deleteMutation = useDeleteExperience();
   const [editTarget, setEditTarget] = useState<Experience | null>(null);
   const [createOpen, setCreateOpen] = useState<boolean>(false);
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   const formatDate = (dateStr: string): string =>
     new Date(dateStr).toLocaleDateString('en-US', {
@@ -85,7 +87,7 @@ export function ExperienceSection() {
                     <Button
                       size='icon'
                       variant='ghost'
-                      className='h-7 w-7'
+                      className='h-7 w-7 cursor-pointer'
                       onClick={() => setEditTarget(exp)}
                     >
                       <Pencil className='h-3 w-3' />
@@ -93,8 +95,9 @@ export function ExperienceSection() {
                     <Button
                       size='icon'
                       variant='ghost'
-                      className='h-7 w-7 text-destructive hover:text-destructive'
-                      onClick={() => deleteMutation.mutate(exp.id)}
+                      className='h-7 w-7 text-destructive hover:text-destructive cursor-pointer'
+                      // onClick={() => deleteMutation.mutate(exp.id)}
+                      onClick={() => setDeleteTarget(exp.id)}
                     >
                       <Trash2 className='h-3 w-3' />
                     </Button>
@@ -150,6 +153,22 @@ export function ExperienceSection() {
       <ExperienceEditSheet
         open={createOpen}
         onOpenChange={setCreateOpen}
+      />
+
+      {/* ConfirmDialog */}
+      <ConfirmDialog
+        open={!!deleteTarget}
+        onOpenChange={(o) => !o && setDeleteTarget(null)}
+        title={'Delete experience?'}
+        description={'This will permanently delete this project and cannot be undone.'}
+        onConfirm={() => {
+          if (deleteTarget) {
+            deleteMutation.mutate(deleteTarget, {
+              onSuccess: () => setDeleteTarget(null)
+            })
+          }
+        }}
+        isPending={deleteMutation.isPending}
       />
     </SectionWrapper>
   );
