@@ -8,6 +8,7 @@ import { useHero, useUpsertHero } from '@/hooks/use-portfolio';
 import { useAuthStore } from '@/store/auth.store';
 import { HeroEditSheet } from '@/components/editor/hero-edit-sheet';
 import { useState } from 'react';
+import AvailabilityBadge from '../features/availabity-badge';
 
 export function HeroSection() {
   const { data: hero, isLoading } = useHero();
@@ -30,7 +31,7 @@ export function HeroSection() {
   if (!hero) return null;
 
   return (
-    <section className='relative flex min-h-[80vh] items-center justify-center px-6'>
+    <section className='relative flex min-h-[80vh] items-center justify-center px-6' id='hero'>
       {/* Edit button */}
       {isAuthenticated && (
         <Button
@@ -48,8 +49,12 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className='max-w-2xl space-y-6 text-center'
+        className='max-w-2xl space-y-4 text-center'
       >
+        <div className=''>
+          <AvailabilityBadge />
+        </div>
+
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

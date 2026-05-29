@@ -41,6 +41,7 @@ export function ExperienceSection() {
 
   return (
     <SectionWrapper
+      id='experiences'
       title='Experience'
       action={
         isAuthenticated ?
@@ -132,9 +133,18 @@ export function ExperienceSection() {
                     {exp.endDate ? formatDate(exp.endDate) : 'Present'}
                   </p>
 
-                  <p className='text-sm leading-relaxed text-muted-foreground'>
+                  {/* <p className='text-sm leading-relaxed text-muted-foreground'>
                     {exp.description}
-                  </p>
+                  </p> */}
+
+                  <ul className='list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground'>
+                    {exp.description
+                      .split('\n')
+                      .filter((line) => line.trim() !== '')
+                      .map((line, index) => (
+                        <li key={index}>{line}</li>
+                      ))}
+                  </ul>
                 </div>
               </motion.div>
             ))}
@@ -160,12 +170,14 @@ export function ExperienceSection() {
         open={!!deleteTarget}
         onOpenChange={(o) => !o && setDeleteTarget(null)}
         title={'Delete experience?'}
-        description={'This will permanently delete this project and cannot be undone.'}
+        description={
+          'This will permanently delete this project and cannot be undone.'
+        }
         onConfirm={() => {
           if (deleteTarget) {
             deleteMutation.mutate(deleteTarget, {
-              onSuccess: () => setDeleteTarget(null)
-            })
+              onSuccess: () => setDeleteTarget(null),
+            });
           }
         }}
         isPending={deleteMutation.isPending}

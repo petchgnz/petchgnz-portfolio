@@ -42,7 +42,7 @@ export function SkillsSection() {
   )
 
   return (
-    <SectionWrapper title="Skills">
+    <SectionWrapper title="Skills" id='skills'>
       <div ref={ref}>
         {isLoading ? (
           <div className="flex flex-wrap gap-2">
