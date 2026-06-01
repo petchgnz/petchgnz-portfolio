@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UsersService } from 'src/users/users.service';
 import { JwtService, JwtSignOptions } from '@nestjs/jwt';
@@ -19,6 +23,12 @@ export class AuthService {
 
   // Register
   async register(dto: CreateUserDto) {
+    const existingCount = await this.prisma.user.count();
+    if (existingCount > 0)
+      throw new ForbiddenException(
+        'Registration is disabled. This portfolio already has an owner.',
+      );
+
     const user = await this.usersService.create(dto);
     return this.generateTokens(user.id, user.email);
   }
