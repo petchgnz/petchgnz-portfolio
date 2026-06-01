@@ -26,7 +26,7 @@ interface RequestWithRefresh extends Request {
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  // -- POST /auth/refister -------------------------------------------------
+  // -- POST /auth/register -------------------------------------------------
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
   register(@Body() dto: CreateUserDto) {

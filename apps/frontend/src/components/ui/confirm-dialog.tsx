@@ -32,16 +32,16 @@ export function ConfirmDialog({
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>{description}</AlertDialogDescription>
+          <AlertDialogTitle className='pointer-events-none'>{title}</AlertDialogTitle>
+          <AlertDialogDescription className='pointer-events-none'>{description}</AlertDialogDescription>
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={isPending} className='cursor-pointer' >Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
             disabled={isPending}
-            className='bg-destructive text-destructive-foreground hover:bg-destructive/90'
+            className='bg-destructive text-destructive-foreground hover:bg-destructive/90 cursor-pointer'
           >
             {isPending ? 'Deleting...' : confirmLabel}
           </AlertDialogAction>

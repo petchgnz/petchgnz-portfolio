@@ -11,7 +11,6 @@ import { Separator } from '@/components/ui/separator';
 import { useAuthStore } from '@/store/auth.store';
 import { useEffect } from 'react';
 
-
 const HomePage = () => {
   const { checkAuth } = useAuthStore();
 
@@ -20,7 +19,7 @@ const HomePage = () => {
   }, [checkAuth]);
 
   return (
-    <div className='min-h-screen bg-background'>
+    <div className='min-h-screen bg-background bg-[radial-gradient(circle,rgba(120,119,198,0.15)_1px,transparent_1px)] bg-size-[24px_24px]'>
       <Navbar />
       <main className='mx-auto max-w-5xl px-6 py-16'>
         <HeroSection />

@@ -112,7 +112,7 @@ async function main() {
       description:
         'A full-stack portfolio website with a built-in CMS for managing content without touching code.',
       type: ProjectType.WEB,
-      githubUrl: 'https://github.com/petchgnz/portfolio-petchgnz',
+      githubUrl: 'https://github.com/petchgnz/petchgnz-portfolio',
       order: 1,
       skills: {
         create: [

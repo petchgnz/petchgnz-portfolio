@@ -90,7 +90,7 @@ const LoginPage = () => {
             <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10'>
               <Sparkles className='h-8 w-8 text-primary' />
             </div>
-            <CardTitle className='text-2xl'>Welcome back, Petchgnz!</CardTitle>
+            <CardTitle className='text-2xl'>Welcome back, Petchgnz! ... Aren&apos;t you?</CardTitle>
             <CardDescription>Sign in to enable edit mode</CardDescription>
           </CardHeader>
 
@@ -130,7 +130,7 @@ const LoginPage = () => {
                 data-invalid={!!form.formState.errors.password}
                 className='relative'
               >
-                <FieldLabel htmlFor='password' className='text-destructive'>Password</FieldLabel>
+                <FieldLabel htmlFor='password'>Password</FieldLabel>
 
                 <div className='relative'>
                   {/* left icon */}

@@ -40,13 +40,22 @@ export function SectionWrapper({
       <div className="space-y-8">
         {/* Section Header */}
         <div className="flex items-center justify-between">
-          <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
-          <div className="flex items-center gap-2">
+          {/* <h2 className="text-3xl font-bold tracking-tight">{title}</h2> */}
+
+          {/* experimental */}
+          <div className='flex w-full items-center gap-4'>
+            <div className='h-px flex-1 bg-linear-to-r from-transparent via-border to-transparent' />
+            <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
+            <div className='h-px flex-1 bg-linear-to-r from-transparent via-border to-transparent' />
+          </div>
+
+
+          <div className="relative items-center gap-2">
             {/* Custom action */}
             {action}
             {/* Edit button for admin only */}
             {isAuthenticated && onEdit && (
-              <Button size="sm" variant="outline" onClick={onEdit} className='gap-2 cursor-pointer'>
+              <Button size="sm" variant="outline" onClick={onEdit} className='absolute -top-3.5 left-5 gap-2 cursor-pointer'>
                 <Pencil className="h-3 w-3" />
                 Edit
               </Button>
@@ -54,7 +63,7 @@ export function SectionWrapper({
           </div>
         </div>
 
-        <Separator />
+        {/* <Separator /> */}
 
         {children}
       </div>
