@@ -40,9 +40,9 @@ export function AboutEditSheet({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="overflow-y-auto px-5">
-        <SheetHeader>
-          <SheetTitle>Edit About</SheetTitle>
+      <SheetContent className="overflow-y-auto px-5" showCloseButton={false}>
+        <SheetHeader className='text-center'>
+          <SheetTitle className='text-3xl'>Edit About</SheetTitle>
         </SheetHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">

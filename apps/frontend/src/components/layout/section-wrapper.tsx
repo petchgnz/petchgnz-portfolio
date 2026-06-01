@@ -8,6 +8,7 @@ import { Separator } from '@/components/ui/separator'
 import { useAuthStore } from '@/store/auth.store'
 
 interface Props {
+  id?: string
   title: string
   children: ReactNode
   onEdit?: () => void
@@ -24,6 +25,7 @@ const MAX_WIDTH = {
 }
 
 export function SectionWrapper({
+  id,
   title,
   children,
   onEdit,
@@ -34,7 +36,7 @@ export function SectionWrapper({
   const { isAuthenticated } = useAuthStore()
 
   return (
-    <section className={`mx-auto px-6 py-24 ${MAX_WIDTH[maxWidth]} ${className}`}>
+    <section className={`mx-auto px-6 py-24 ${MAX_WIDTH[maxWidth]} ${className}`} id={id}>
       <div className="space-y-8">
         {/* Section Header */}
         <div className="flex items-center justify-between">

@@ -22,6 +22,7 @@ export function ContactSection() {
 
   return (
     <SectionWrapper
+      id='contact'
       title='Contact'
       onEdit={isAuthenticated ? () => setOpen(true) : undefined}
     >

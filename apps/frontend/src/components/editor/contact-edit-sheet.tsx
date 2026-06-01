@@ -41,7 +41,7 @@ export function ContactEditSheet({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="overflow-y-auto px-5" showCloseButton={false}>
         <SheetHeader className='text-center'>
-          <SheetTitle>Edit Contact</SheetTitle>
+          <SheetTitle className='text-3xl'>Edit Contact</SheetTitle>
         </SheetHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">

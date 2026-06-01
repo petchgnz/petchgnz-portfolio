@@ -37,6 +37,7 @@ export function ProjectsSection() {
 
   return (
     <SectionWrapper
+      id='projects'
       title='Projects'
       maxWidth='md'
       action={

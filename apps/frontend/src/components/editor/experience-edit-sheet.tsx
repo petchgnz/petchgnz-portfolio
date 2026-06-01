@@ -96,7 +96,7 @@ export function ExperienceEditSheet({
         showCloseButton={false}
       >
         <SheetHeader className='text-center'>
-          <SheetTitle>
+          <SheetTitle className='text-3xl'>
             {isEditing ? 'Edit Experience' : 'Add Experience'}
           </SheetTitle>
         </SheetHeader>
@@ -143,6 +143,10 @@ export function ExperienceEditSheet({
                   rows={3}
                   aria-invalid={fieldState.invalid}
                 />
+
+                <p className='text-xs text-muted-foreground'>
+                  One line = one bullet point
+                </p>
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
                 )}

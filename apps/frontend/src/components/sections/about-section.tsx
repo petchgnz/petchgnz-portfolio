@@ -22,6 +22,7 @@ export function AboutSection() {
 
   return (
     <SectionWrapper
+      id='about'
       title='About'
       onEdit={isAuthenticated ? () => setOpen(true) : undefined}
     >

@@ -73,7 +73,7 @@ export function ProjectEditSheet({ open, onOpenChange, defaultValues }: Props) {
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="overflow-y-auto px-5" showCloseButton={false}>
         <SheetHeader className='text-center'>
-          <SheetTitle>{isEditing ? 'Edit Project' : 'Add Project'}</SheetTitle>
+          <SheetTitle className='text-3xl'>{isEditing ? 'Edit Project' : 'Add Project'}</SheetTitle>
         </SheetHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">

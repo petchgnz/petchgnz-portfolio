@@ -55,9 +55,9 @@ export function HeroEditSheet({
       open={open}
       onOpenChange={onOpenChange}
     >
-      <SheetContent className='overflow-y-auto px-5'>
-        <SheetHeader>
-          <SheetTitle>Edit Hero</SheetTitle>
+      <SheetContent className='overflow-y-auto px-5' showCloseButton={false}>
+        <SheetHeader className='text-center'>
+          <SheetTitle className='text-3xl'>Edit Hero</SheetTitle>
         </SheetHeader>
 
         <form
