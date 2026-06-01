@@ -48,7 +48,7 @@ export function ExperienceSection() {
           <Button
             size='sm'
             onClick={() => setCreateOpen(true)}
-            className='cursor-pointer gap-2'
+            className='absolute -top-3.5 left-5 cursor-pointer gap-2'
           >
             <Plus className='size-4' />
             Add

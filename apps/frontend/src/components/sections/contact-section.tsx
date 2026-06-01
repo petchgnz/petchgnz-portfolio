@@ -38,7 +38,7 @@ export function ContactSection() {
               <Skeleton className='h-5 w-24' />
             </div>
           : contact ?
-            <div className='flex flex-wrap gap-6'>
+            <div className='flex flex-wrap gap-12 justify-center'>
               <a
                 href={`mailto:${contact.email}`}
                 className='flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground'
