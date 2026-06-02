@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import {
   Sheet,
@@ -15,7 +14,11 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 import { Field, FieldLabel, FieldError } from '@/components/ui/field';
-import type { SkillSection } from '@/types';
+import type { SkillCategory, SkillLevel, SkillSection } from '@/types';
+import { useUpsertSkill } from '@/hooks/use-portfolio';
+
+const LEVEL: SkillLevel[] = ['BEGINNER', 'INTERMEDIATED', 'ADVANCE', 'EXPERT'];
+const CATEGORY: SkillCategory[] = ['FRONTEND', 'BACKEND', 'DATABASE', 'DEVOPS'];
 
 const schema = z.object({
   // description:  z.string().min(10, 'At least 10 characters'),
@@ -40,15 +43,34 @@ export function SkillEditSheet({
   open,
   onOpenChange,
   defaultValues,
-  onSubmit,
+  // onSubmit,
   isPending,
 }: Props) {
   const { control, handleSubmit, reset } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues,
   });
-
+  const mutation = useUpsertSkill();
   const isEditing = !!defaultValues?.id;
+
+  const onSubmit = (values: FormValues) => {
+    console.log(values)
+
+    const payload = {
+      ...values,
+      id: defaultValues?.id,
+      name: values.name || null,
+      level: values.level || null,
+      category: values.category || null,
+    };
+
+    mutation.mutate(
+      // { ...values, id: defaultValues?.id },
+      payload,
+      { onSuccess: () => onOpenChange(false) },
+    );
+
+  }
 
   useEffect(() => {
     reset(defaultValues);
@@ -64,7 +86,9 @@ export function SkillEditSheet({
         showCloseButton={false}
       >
         <SheetHeader className='text-center'>
-          <SheetTitle className='text-3xl'>{isEditing ? 'Edit Skill' : 'Add Skill'}</SheetTitle>
+          <SheetTitle className='text-3xl'>
+            {isEditing ? 'Edit Skill' : 'Add Skill'}
+          </SheetTitle>
         </SheetHeader>
 
         <form
@@ -90,7 +114,7 @@ export function SkillEditSheet({
             )}
           />
 
-          {(['level', 'category'] as const).map((name) => (
+          {(['level'] as const).map((name) => (
             <Controller
               key={name}
               name={name}
@@ -103,11 +127,65 @@ export function SkillEditSheet({
                   >
                     {name}
                   </FieldLabel>
-                  <Input
+                  {/* <Input
                     {...field}
                     id={name}
                     aria-invalid={fieldState.invalid}
-                  />
+                  /> */}
+                  <select
+                    {...field}
+                    id='level'
+                    className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+                  >
+                    {LEVEL.map((level) => (
+                      <option
+                        value={level}
+                        key={level}
+                      >
+                        {level}
+                      </option>
+                    ))}
+                  </select>
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+          ))}
+
+          {(['category'] as const).map((name) => (
+            <Controller
+              key={name}
+              name={name}
+              control={control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel
+                    htmlFor={name}
+                    className='capitalize'
+                  >
+                    {name}
+                  </FieldLabel>
+                  {/* <Input
+                    {...field}
+                    id={name}
+                    aria-invalid={fieldState.invalid}
+                  /> */}
+                  <select
+                    {...field}
+                    id='level'
+                    className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+                  >
+                    {CATEGORY.map((cat) => (
+                      <option
+                        value={cat}
+                        key={cat}
+                      >
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
