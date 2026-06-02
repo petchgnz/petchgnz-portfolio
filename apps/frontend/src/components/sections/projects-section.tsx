@@ -72,7 +72,7 @@ export function ProjectsSection() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: idx * 0.1, duration: 0.4 }}
               >
-                <Card className='group relative h-full transition-shadow hover:shadow-md'>
+                <Card className='group relative h-full transition-shadow hover:shadow-lg'>
                   {/* admin controls (when hovered) */}
                   {isAuthenticated && (
                     <div className='absolute right-3 top-7 z-10 flex gap-1 opacity-0 transition-opacity group-hover:opacity-100'>
