@@ -4,7 +4,6 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "node apps/backend/dist/main",
-    "restartPolicyType": "ON_FAILURE"
+    "startCommand": "node dist/main"
   }
 }
