@@ -37,9 +37,9 @@ export interface AboutSection {
 }
 export interface Skill {
   id: string
-  name: string
-  level: SkillLevel
-  category: SkillCategory
+  name: string | null
+  level: SkillLevel | null
+  category: SkillCategory | null
 }
 
 export interface ProjectSkill {
