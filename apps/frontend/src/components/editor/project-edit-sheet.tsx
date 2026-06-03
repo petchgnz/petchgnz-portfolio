@@ -24,7 +24,7 @@ const schema = z.object({
   title: z.string().min(1, 'Required'),
   description: z.string().min(1, 'Required'),
   type: z.enum(['WEB', 'MOBILE', 'GAME', 'OTHER']),
-  skillIds: z.array(z.string()).default([]),
+  skillIds: z.array(z.string()),
   githubUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
   liveUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
   imageUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
