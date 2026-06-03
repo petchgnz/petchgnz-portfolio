@@ -3,13 +3,14 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useSkills } from '@/hooks/use-portfolio';
+import { useDeleteSkill, useSkills } from '@/hooks/use-portfolio';
 import { SectionWrapper } from '@/components/layout/section-wrapper';
 import type { SkillCategory, SkillLevel } from '@/types';
 import { useAuthStore } from '@/store/auth.store';
 import { Button } from '../ui/button';
-import { Plus } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 import { SkillEditSheet } from '../editor/skill-edit-sheet';
+import { ConfirmDialog } from '../ui/confirm-dialog';
 
 const LEVEL_STYLE: Record<SkillLevel, string> = {
   BEGINNER: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400',
@@ -40,6 +41,8 @@ export function SkillsSection() {
 
   const { isAuthenticated } = useAuthStore();
   const [createOpen, setCreateOpen] = useState<boolean>(false);
+  const deleteMutation = useDeleteSkill();
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   const isInView = useInView(ref as React.RefObject<HTMLElement>, {
     once: true,
@@ -97,10 +100,11 @@ export function SkillsSection() {
                   transition={{ delay: idx * 0.08, duration: 0.4 }}
                   className='space-y-3'
                 >
-                  <p className='text-xs font-semibold uppercase tracking-widest text-muted-foreground'>
+                  <p className='text-xs font-semibold uppercase tracking-widest text-muted-foreground pointer-events-none'>
                     {CATEGORY_LABEL[category]}
                   </p>
-                  <div className='flex flex-wrap gap-2'>
+
+                  <div className='flex flex-wrap gap-4'>
                     {items
                       ?.slice()
                       .sort(
@@ -111,9 +115,24 @@ export function SkillsSection() {
                       .map((skill) => (
                         <span
                           key={skill.id}
-                          className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium transition-colors ${LEVEL_STYLE[skill.level as SkillLevel]}`}
+                          className={`group relative inline-flex items-center rounded-full px-3 py-1 text-sm font-medium transition-colors ${LEVEL_STYLE[skill.level as SkillLevel]}`}
                         >
                           {skill.name}
+
+                          {/* admin control (when hovered) */}
+                          {isAuthenticated && (
+                            // <div className='absolute right-3 top-7 z-10 flex gap-1 opacity-0 transition-opacity group-hover:opacity-100'>
+                            <div className='absolute -right-3 -top-3 opacity-0 group-hover:opacity-100'>
+                              <Button
+                                size='icon'
+                                variant='ghost'
+                                className='h-7 w-7 text-destructive hover:text-destructive cursor-pointer'
+                                onClick={() => setDeleteTarget(skill.id)}
+                              >
+                                <X className='h-3 w-3' />
+                              </Button>
+                            </div>
+                          )}
                         </span>
                       ))}
                   </div>
@@ -128,6 +147,22 @@ export function SkillsSection() {
       <SkillEditSheet
         open={createOpen}
         onOpenChange={setCreateOpen}
+      />
+
+      {/* ConfirmDialog */}
+      <ConfirmDialog
+        open={!!deleteTarget}
+        onOpenChange={(o) => !o && setDeleteTarget(null)}
+        title={'Delete skill?'}
+        description={'This will permanently delete this project and cannot be undone.'}
+        onConfirm={() => {
+          if (deleteTarget) {
+            deleteMutation.mutate(deleteTarget, {
+              onSuccess: () => setDeleteTarget(null)
+            })
+          }
+        }}
+        isPending={deleteMutation.isPending}
       />
     </SectionWrapper>
   );

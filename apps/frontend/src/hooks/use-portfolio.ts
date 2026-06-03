@@ -1,5 +1,12 @@
 import api from '@/lib/axios';
-import { AboutSection, ContactSection, Experience, HeroSection, Project, Skill } from '@/types';
+import {
+  AboutSection,
+  ContactSection,
+  Experience,
+  HeroSection,
+  Project,
+  Skill,
+} from '@/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const portfolioKeys = {
@@ -57,6 +64,28 @@ export function useSkills() {
   });
 }
 
+export function useUpsertSkill() {
+  const queryClient = useQueryClient();
+
+  return useMutation<Skill, Error, Partial<Skill> & { id?: string }>({
+    mutationFn: ({ id, ...data }) =>
+      id ?
+        api.patch(`/portfolio/skills/${id}`, data).then((res) => res.data)
+      : api.post(`/portfolio/skills`, data).then((res) => res.data),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: portfolioKeys.skills })
+  });
+}
+
+export function useDeleteSkill() {
+  const queryClient = useQueryClient();
+
+  return useMutation<void, Error, string>({
+    mutationFn: (id) => api.delete(`/portfolio/skills/${id}`),
+    onSettled: () =>
+      queryClient.invalidateQueries({ queryKey: portfolioKeys.skills }),
+  });
+}
+
 // -- Projects =====
 export function useProjects() {
   return useQuery<Project[]>({
@@ -94,28 +123,28 @@ export function useExperiences() {
   return useQuery<Experience[]>({
     queryKey: portfolioKeys.experiences,
     queryFn: () => api.get('/portfolio/experiences').then((r) => r.data),
-  })
+  });
 }
 
 export function useUpsertExperience() {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   return useMutation<Experience, Error, Partial<Experience> & { id?: string }>({
     mutationFn: ({ id, ...data }) =>
-      id
-        ? api.patch(`/portfolio/experiences/${id}`, data).then((r) => r.data)
-        : api.post('/portfolio/experiences', data).then((r) => r.data),
+      id ?
+        api.patch(`/portfolio/experiences/${id}`, data).then((r) => r.data)
+      : api.post('/portfolio/experiences', data).then((r) => r.data),
     onSettled: () =>
       queryClient.invalidateQueries({ queryKey: portfolioKeys.experiences }),
-  })
+  });
 }
 
 export function useDeleteExperience() {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   return useMutation<void, Error, string>({
     mutationFn: (id) => api.delete(`/portfolio/experiences/${id}`),
     onSettled: () =>
       queryClient.invalidateQueries({ queryKey: portfolioKeys.experiences }),
-  })
+  });
 }
 
 // ── Contact ───────────────────────────────────────────────────────────────────
@@ -123,15 +152,15 @@ export function useContact() {
   return useQuery<ContactSection>({
     queryKey: portfolioKeys.contact,
     queryFn: () => api.get('/portfolio/contact').then((r) => r.data),
-  })
+  });
 }
 
 export function useUpsertContact() {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   return useMutation<ContactSection, Error, Partial<ContactSection>>({
     mutationFn: (data) =>
       api.patch('/portfolio/contact', data).then((r) => r.data),
     onSettled: () =>
       queryClient.invalidateQueries({ queryKey: portfolioKeys.contact }),
-  })
+  });
 }

@@ -45,7 +45,7 @@ export function SectionWrapper({
           {/* experimental */}
           <div className='flex w-full items-center gap-4'>
             <div className='h-px flex-1 bg-linear-to-r from-transparent via-border to-transparent' />
-            <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
+            <h2 className="text-3xl font-bold tracking-tight pointer-events-none">{title}</h2>
             <div className='h-px flex-1 bg-linear-to-r from-transparent via-border to-transparent' />
           </div>
 
