@@ -20,7 +20,7 @@ import {
 import { UpsertHeroDto } from './dto/upsert-hero.dto';
 import { UpsertAboutDto } from './dto/upsert-about.dto';
 import { UpsertContactDto } from './dto/upsert-contact.dto';
-import { Experience, Project, Skill } from 'generated/prisma/browser';
+import { Experience, Project, Skill } from '../../generated/prisma/client';
 import { CreateSkillDto } from './dto/create-skill.dto';
 import { UpdateSkillDto } from './dto/update-skill.dto';
 import { CreateProjectDto } from './dto/create-project.dto';
