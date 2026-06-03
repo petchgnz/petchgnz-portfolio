@@ -5,7 +5,7 @@ import {
   IsDateString,
   IsInt,
 } from 'class-validator';
-import { EmploymentType, TeamworkType } from '../../../generated/prisma/client';
+import { EmploymentType, TeamworkType } from '@prisma/client';
 
 export class UpdateExperienceDto {
   @IsOptional() @IsString() company?: string;

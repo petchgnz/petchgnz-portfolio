@@ -5,7 +5,7 @@ import {
   Project,
   Skill,
   Experience,
-} from '../../generated/prisma/client';
+} from '@prisma/client';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpsertHeroDto } from './dto/upsert-hero.dto';

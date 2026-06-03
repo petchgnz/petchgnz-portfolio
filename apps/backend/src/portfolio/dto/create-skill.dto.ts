@@ -1,5 +1,5 @@
 import { IsString, IsEnum } from 'class-validator';
-import { SkillLevel, SkillCategory } from '../../../generated/prisma/client';
+import { SkillLevel, SkillCategory } from '@prisma/client';
 
 export class CreateSkillDto {
   @IsString() name!: string;

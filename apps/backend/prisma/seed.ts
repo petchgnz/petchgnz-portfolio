@@ -6,7 +6,7 @@ import {
   ProjectType,
   SkillCategory,
   SkillLevel,
-} from '../generated/prisma/client';
+} from '@prisma/client';
 import * as path from 'path';
 
 dotenv.config({ path: path.resolve(__dirname, '../../../.env') });

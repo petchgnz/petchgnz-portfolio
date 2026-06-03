@@ -12,15 +12,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { PortfolioService } from './portfolio.service';
-import {
-  AboutSection,
-  Contact,
-  HeroSection,
-} from '../../generated/prisma/client';
+import { AboutSection, Contact, HeroSection } from '@prisma/client';
 import { UpsertHeroDto } from './dto/upsert-hero.dto';
 import { UpsertAboutDto } from './dto/upsert-about.dto';
 import { UpsertContactDto } from './dto/upsert-contact.dto';
-import { Experience, Project, Skill } from '../../generated/prisma/client';
+import { Experience, Project, Skill } from '@prisma/client';
 import { CreateSkillDto } from './dto/create-skill.dto';
 import { UpdateSkillDto } from './dto/update-skill.dto';
 import { CreateProjectDto } from './dto/create-project.dto';

@@ -8,7 +8,7 @@ import {
   Min,
   ValidateIf,
 } from 'class-validator';
-import { ProjectType } from '../../../generated/prisma/client';
+import { ProjectType } from '@prisma/client';
 
 export class CreateProjectDto {
   @IsString() title!: string;
