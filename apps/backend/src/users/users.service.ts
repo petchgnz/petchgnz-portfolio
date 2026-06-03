@@ -1,7 +1,7 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { User } from 'generated/prisma/client';
+import { User } from '../../generated/prisma/client';
 import * as bcrypt from 'bcrypt';
 
 export type UserWithoutPassword = Omit<User, 'password'>;

@@ -12,7 +12,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { PortfolioService } from './portfolio.service';
-import { AboutSection, Contact, HeroSection } from 'generated/prisma/client';
+import {
+  AboutSection,
+  Contact,
+  HeroSection,
+} from '../../generated/prisma/client';
 import { UpsertHeroDto } from './dto/upsert-hero.dto';
 import { UpsertAboutDto } from './dto/upsert-about.dto';
 import { UpsertContactDto } from './dto/upsert-contact.dto';

@@ -2,10 +2,11 @@ import {
   AboutSection,
   HeroSection,
   Contact,
+  Project,
+  Skill,
   Experience,
-} from './../../generated/prisma/client';
+} from '../../generated/prisma/client';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Project, Skill } from 'generated/prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpsertHeroDto } from './dto/upsert-hero.dto';
 import { UpsertAboutDto } from './dto/upsert-about.dto';
