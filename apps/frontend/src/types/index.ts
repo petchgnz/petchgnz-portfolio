@@ -51,8 +51,8 @@ export interface ProjectSkill {
 export interface SkillSection {
   id: string;
   name: string;
-  level: string;
-  category: string;
+  level: SkillLevel;
+  category: SkillCategory;
 }
 
 export interface Project {
