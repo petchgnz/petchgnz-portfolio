@@ -13,6 +13,8 @@ async function bootstrap() {
     }),
   );
 
+  console.log('FRONTEND_URL =', process.env.FRONTEND_URL);
+
   app.enableCors({
     // origin: true,
     origin: ['http://localhost:3000', process.env.FRONTEND_URL ?? ''],
