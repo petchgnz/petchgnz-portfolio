@@ -34,24 +34,27 @@ type FormValues = z.infer<typeof schema>;
 interface Props {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  defaultValues: SkillSection;
-  onSubmit: (values: FormValues) => void;
-  isPending: boolean;
+  defaultValues?: SkillSection;
 }
 
 export function SkillEditSheet({
   open,
   onOpenChange,
   defaultValues,
-  // onSubmit,
-  isPending,
 }: Props) {
+  const getDefaults = (): FormValues => ({
+    name: defaultValues?.name ?? '',
+    level: defaultValues?.level ?? 'BEGINNER',
+    category: defaultValues?.category ?? 'FRONTEND'
+  });
+
   const { control, handleSubmit, reset } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues,
+    defaultValues: getDefaults(),
   });
   const mutation = useUpsertSkill();
   const isEditing = !!defaultValues?.id;
+
 
   const onSubmit = (values: FormValues) => {
     console.log(values)
@@ -193,9 +196,9 @@ export function SkillEditSheet({
           <Button
             type='submit'
             className='w-full cursor-pointer'
-            disabled={isPending}
+            disabled={mutation.isPending}
           >
-            {isPending ?
+            {mutation.isPending ?
               <>
                 <Loader2 className='mr-2 h-4 w-4 animate-spin' />
                 Saving...
