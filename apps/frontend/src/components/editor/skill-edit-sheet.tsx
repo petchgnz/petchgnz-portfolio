@@ -25,8 +25,8 @@ const schema = z.object({
   // location:     z.string().min(1, 'Required'),
   // availability: z.string().min(1, 'Required'),
   name: z.string().min(1, 'Required'),
-  level: z.string().min(1, 'Required'),
-  category: z.string().min(1, 'Required'),
+  level: z.enum(LEVEL),
+  category: z.enum(CATEGORY),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -59,13 +59,9 @@ export function SkillEditSheet({
     const payload = {
       ...values,
       id: defaultValues?.id,
-      name: values.name || null,
-      level: values.level || null,
-      category: values.category || null,
     };
 
     mutation.mutate(
-      // { ...values, id: defaultValues?.id },
       payload,
       { onSuccess: () => onOpenChange(false) },
     );
