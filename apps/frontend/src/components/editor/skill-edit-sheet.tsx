@@ -59,7 +59,7 @@ export function SkillEditSheet({
     const payload = {
       ...values,
       id: defaultValues?.id,
-      name: values.name || null,
+      name: values.name || undefined,
       level: values.level || null,
       category: values.category || null,
     };
