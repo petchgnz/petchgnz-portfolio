@@ -1,4 +1,5 @@
 import { PrismaPg } from '@prisma/adapter-pg';
+import * as bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
 import {
   PrismaClient,
@@ -15,6 +16,23 @@ const prisma = new PrismaClient({ adapter });
 
 async function main() {
   console.log('Seeding initial data...');
+
+  // -- create admin user
+  const adminEmail = process.env.ADMIN_EMAIL ?? 'phetchgnz@gmail.com';
+  const adminPassword = process.env.ADMIN_PASSWORD ?? 'admin1423';
+
+  const existing = await prisma.user.findUnique({
+    where: { email: adminEmail },
+  });
+
+  if (!existing) {
+    const hashed = await bcrypt.hash(adminPassword, 10);
+    await prisma.user.create({ data: { email: adminEmail, password: hashed } });
+
+    console.log(`Admin created: ${adminEmail}`);
+  } else {
+    console.log(`Admin already exists: ${adminEmail}`);
+  }
 
   // -- clear existing data
   await prisma.projectSkill.deleteMany();
