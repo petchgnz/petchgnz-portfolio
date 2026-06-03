@@ -23,6 +23,9 @@
     "prisma:studio": "dotenv -e ../../.env -- npx prisma studio",
     "prisma:seed": "dotenv -e ../../.env -- ts-node --project tsconfig.json prisma/seed.ts"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.4",
