@@ -2,12 +2,13 @@
 
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Mail, GitBranch, Link } from 'lucide-react';
+import { Mail, GitBranch, Link, Phone } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useContact, useUpsertContact } from '@/hooks/use-portfolio';
 import { useAuthStore } from '@/store/auth.store';
 import { SectionWrapper } from '@/components/layout/section-wrapper';
 import { ContactEditSheet } from '@/components/editor/contact-edit-sheet';
+import Image from 'next/image';
 
 export function ContactSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -38,7 +39,9 @@ export function ContactSection() {
               <Skeleton className='h-5 w-24' />
             </div>
           : contact ?
-            <div className='flex flex-wrap gap-12 justify-center'>
+            // <div className='flex flex-wrap gap-12 justify-center'>
+            <div className='grid grid-cols-3 gap-12 justify-center'>
+              {/* email */}
               <a
                 href={`mailto:${contact.email}`}
                 className='flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground'
@@ -46,6 +49,30 @@ export function ContactSection() {
                 <Mail className='h-4 w-4' />
                 {contact.email}
               </a>
+
+              {/* Telephone */}
+              <p className='flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground pointer-events-none'>
+                <Phone className='size-4' />
+                (+66) 94-353-8855
+              </p>
+
+              {/* line */}
+              <a
+                href='https://line.me/ti/p/pciiKm3cbI'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground'
+              >
+                <Image
+                  src={'contact-svg/line_white.svg'}
+                  alt={'line_logo'}
+                  width={16}
+                  height={16}
+                />
+                Line ID: phmmrn55
+              </a>
+
+              {/* github */}
               {contact.github && (
                 <a
                   href={contact.github}
@@ -57,6 +84,8 @@ export function ContactSection() {
                   GitHub
                 </a>
               )}
+
+              {/* linkedin */}
               {contact.linkedin && (
                 <a
                   href={contact.linkedin}

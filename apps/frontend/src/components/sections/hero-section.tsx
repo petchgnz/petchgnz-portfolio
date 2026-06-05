@@ -31,7 +31,10 @@ export function HeroSection() {
   if (!hero) return null;
 
   return (
-    <section className='relative flex min-h-[80vh] items-center justify-center px-6' id='hero'>
+    <section
+      className='relative flex min-h-[80vh] items-center justify-center px-6'
+      id='hero'
+    >
       {/* Edit button */}
       {isAuthenticated && (
         <Button
@@ -90,6 +93,26 @@ export function HeroSection() {
         >
           {hero.bio}
         </motion.p>
+
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+
+          className=''
+        >
+          <Button
+            variant={'default'}
+          >
+            <a
+              href='/RS-Phummarin-Rojanamarn.pdf'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              View resume
+            </a>
+          </Button>
+        </motion.button>
       </motion.div>
 
       <HeroEditSheet
