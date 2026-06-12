@@ -39,20 +39,20 @@ export function ContactSection() {
               <Skeleton className='h-5 w-24' />
             </div>
           : contact ?
-            // <div className='flex flex-wrap gap-12 justify-center'>
-            <div className='grid grid-cols-3 gap-12 justify-center'>
+            <div className='flex flex-col md:grid md:grid-cols-3 gap-x-8 gap-y-4'>
+            {/* <div className='grid grid-cols-3 gap-12 justify-center'> */}
               {/* email */}
               <a
                 href={`mailto:${contact.email}`}
                 className='flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground'
               >
-                <Mail className='h-4 w-4' />
+                <Mail className='h-4 w-4 shrink-0' />
                 {contact.email}
               </a>
 
               {/* Telephone */}
               <p className='flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground pointer-events-none'>
-                <Phone className='size-4' />
+                <Phone className='size-4 shrink-0' />
                 (+66) 94-353-8855
               </p>
 
@@ -64,10 +64,11 @@ export function ContactSection() {
                 className='flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground'
               >
                 <Image
-                  src={'contact-svg/line_white.svg'}
+                  src={'/contact-svg/line_white.svg'}
                   alt={'line_logo'}
                   width={16}
                   height={16}
+                  className='shrink-0'
                 />
                 Line ID: phmmrn55
               </a>
@@ -80,7 +81,7 @@ export function ContactSection() {
                   rel='noopener noreferrer'
                   className='flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground'
                 >
-                  <GitBranch className='h-4 w-4' />
+                  <GitBranch className='h-4 w-4 shrink-0' />
                   GitHub
                 </a>
               )}
@@ -93,7 +94,7 @@ export function ContactSection() {
                   rel='noopener noreferrer'
                   className='flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground'
                 >
-                  <Link className='h-4 w-4' />
+                  <Link className='h-4 w-4 shrink-0' />
                   LinkedIn
                 </a>
               )}
